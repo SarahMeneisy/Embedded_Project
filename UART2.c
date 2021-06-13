@@ -1,101 +1,34 @@
-while(1){
+void UART5_inti(void){
 
-            DS = UART5_read();
+    SYSCTL_RCGCUART_R |= 0x02;
+      while((SYSCTL_PRUART_R & 0x02) == 0);
+      SYSCTL_RCGCGPIO_R |= 0x02;
+          while((SYSCTL_PRGPIO_R & 0x02) == 0);
 
-                if (DS=='$')
+      GPIO_PORTE_CR_R |= 0x1F;
+      GPIO_PORTE_AMSEL_R &= ~0x1F;
+      GPIO_PORTE_AFSEL_R |= 0x30;
+      GPIO_PORTE_PCTL_R = (GPIO_PORTB_PCTL_R & ~0xFF) | (GPIO_PCTL_PB0_U1RX | GPIO_PCTL_PB1_U1TX);
+      GPIO_PORTE_DEN_R |= 0x1F;
+      GPIO_PORTE_DIR_R |= 0x1E;
+      GPIO_PORTE_DIR_R &= ~0x10;
 
-                {
+      UART5_CTL_R &= ~UART_CTL_UARTEN;
+      //set buad rate devider
+      UART5_IBRD_R = 104;
+      UART5_FBRD_R = 11;
+        UART5_LCRH_R = (UART_LCRH_WLEN_8 | UART_LCRH_FEN);
+      UART5_CTL_R |= (UART_CTL_UARTEN | UART_CTL_RXE | UART_CTL_TXE);
 
-                      a =UART5_read();
+        }
+char UART5_read(void){
 
-                    if (a=='G')
-
-                    {
-
-                       // while (R_isEmpty()){};
-
-
-
-                          a1 =UART5_read();
-
-
-
-                            if (a1=='P')
-
-                            {
-
-                               // while (R_isEmpty()){};
-
-
-
-                             a2 =UART5_read();
+    while((UART5_FR_R & 0x10) == 0x10);
 
 
 
-                                if (a2=='R')
+    return UART5_DR_R & 0xFF;
 
-                                {
-
-                                    //while (R_isEmpty()){};
-
-
-
-                               a3 =UART5_read();
-
-
-
-
-
-                                  if (a3 =='M')
-
-                                  {
-
-                                    //while (R_isEmpty()){};
-
-
-
-                               a4 =UART5_read();
-
-
-
-                                        if (a4 =='C')
-
-                                    {
-
-                                      //while (R_isEmpty()){};
-
-
-
-                                 a5 =UART5_read();
-
-
-
-                                          if (a5 ==',')
-
-                                    {
-
-                                        //while (R_isEmpty()){};
-
-
-
-                                   a6 =UART5_read();
-
-
-
-                                            while (a6 !='*')
-
-                                        {
-
-                                                     gValues[in]=a6;
-
-                                          //while (R_isEmpty()){};
-
-
-
-                                      a6 =UART5_read();
-
-                                            in++;
-
-                                        }
+}
 
                                         
