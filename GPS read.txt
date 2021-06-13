@@ -4,7 +4,7 @@
 #include <string.h>
 
 void SystemInit(){};
-void GPS_Read(double* lat , double* lon);
+int GPS_Read(double* lat , double* lon);
  
 	
 
