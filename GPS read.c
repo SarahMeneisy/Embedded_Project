@@ -5,7 +5,7 @@
 
 void SystemInit(){};
 void GPS_Read(double* lat , double* lon);
-char UART5_read(void); 
+ 
 	
 
 int main(void){
@@ -14,16 +14,7 @@ int main(void){
 	
 }
  
- 
-	char UART5_read(void){
-
-    while((UART5_FR_R & 0x10) == 0x10);
-
-
-
-    return UART5_DR_R & 0xFF;
-
-}
+  
 	int GPS_Read(double* time ,double* lat , double* lon){
 
             char DS,a,a1,a2,a3,a4,a5,a6 ,gValues[100],pValue[10][20],*loc,x,y ;
