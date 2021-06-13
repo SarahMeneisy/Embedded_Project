@@ -95,81 +95,7 @@ int main(void)
       delayMs (500);
 
 }
-//                       Write_LCD(buf ,6);
-//
-//
-//
-//                       sLine_LCD();
-//
-//                       delayMs (1);
-//
-//
-//
-//                       Write_LCD(b ,6);
-//
-//                       Write_LCD(buf2 ,8);
-//    delayMs(20);
-//             set8_LCD();
-//             delayUs(50);
-//             Display_LCD();
-//             delayUs(50);
-//             inCurs_LCD();
-//             delayUs(50);
-//             clear_LCD();
-//             delayMs(5);
-//             delayMs(20);
-////
-//////             LCD_data('F');
-//////                   delayMs (1);
-//////                   inCurs_LCD();
-//////                     LCD_data('I');
-//////                   delayMs (1);
-//////                   inCurs_LCD();
-//////                     LCD_data('R');
-//////                   delayMs (1);
-//////                   inCurs_LCD();
-//////                     LCD_data('S');
-//////                   delayMs (1);
-//////                   inCurs_LCD();
-//////                     LCD_data('T');
-//////                   delayMs (1);
-////
-////
-//    Write_LCD(a ,10);
-//
-//    Write_LCD(buf ,6);
-//
-//
-//
-//    sLine_LCD();
-//
-//    delayMs (1);
-//
-//
-//
-//    Write_LCD(b ,6);
-//
-//    Write_LCD(buf2 ,8);
-//
-//
-//
-//
-//
 
-
-
-
-
-
-//    }
-//
-//    GPIO_PORTF_DATA_R |=0x02;
-
-
-
-
-
-}
 void delayUs (int s ){
 
         int i,j;
@@ -335,8 +261,7 @@ void delayUs (int s ){
               LCD_command(0x30);
 
           }
-	
-    void Write_LCD(char* s,int len){
+					    void Write_LCD(char* s,int len){
 
               int t;
 
