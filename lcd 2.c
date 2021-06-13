@@ -335,4 +335,27 @@ void delayUs (int s ){
               LCD_command(0x30);
 
           }
-					
+	
+    void Write_LCD(char* s,int len){
+
+              int t;
+
+              for ( t=0 ; t<len ; t++)
+
+                    {
+
+                    LCD_data(s[t]);
+
+                    delayMs (1);
+
+                    inCurs_LCD();
+
+
+
+                    }
+
+
+
+
+
+          }
