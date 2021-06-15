@@ -1,83 +1,84 @@
-#include "C:/Keil/tm4c123gh6pm.h"
-#include <stdint.h>
-#include "math.h"
-#include <string.h>
+int main(void)
 
-int main(void){
-	 
- 
-	
-	long double res,total=0; 
-	double *lat1,*lon1,*lat2,*lon2;
-	double distance;
-	  char*a;
-	  char out[16];
-    int i;
-    int t;
-	
-		LCD_init();
-	  UART_inti();
-	  init();
-	 
-	
-	while (total <100){
- 	
-	GPS_Read(lat1,lon1);
-		delayMs(1000);	
-	GPS_Read(lat2,lon2);
-
-	res =distResult(*lat1,*lon1,*lat2,*lon2);
-		
-		total +=res;
-	
-	 if (total >= 100.0 ){          
-		 
-		 distance = ((double) res); 
-
-  snprintf(out, 16, "%f", distance);
-	
-	
-	 
-	 while(1){
-		if ( res >= 100){
-
-		GPIO_PORTF_DATA_R |=0x02;
-		}
-	  
-        clear_LCD();
-        fLine_LCD();
-        rCurs_LCD();
-        delayMs (500);
-
-
-        for ( t=0 ; t<15 ; t++)
-        {
-        LCD_data(a[t]);
-        delayMs (1);
-        inCurs_LCD();
-        
-        }
-
-        sLine_LCD();
-         
+{
 
 
 
-        for (  i=0 ; i<15 ;i++)
-        {
-        LCD_data(out[t]);
-        delayMs (1);
-        inCurs_LCD();
-         
-        }
-		}
-	 
-	 }
- 
-	}
-	
-	
-	
-	
-	
+    double res,total=456.57;
+
+    double *lat1,*lon1, *lat2, *lon2, *time1, *time2,x1=0,x2=0,y1=0,y2=0,timeDif=456.78,d;
+
+      char*a ="distance: ";
+
+     char*b ="time: ";
+
+     char* t,*to,*ds;
+    int re,ftime,fdis,al;
+
+
+
+    LCD_init();
+
+   init();
+   UART5_inti();
+
+
+    while (total <100){
+
+
+    re=GPS_Read(time1 ,lat1,lon1);
+
+        delayMs(1000);
+
+    re=GPS_Read(time2 ,lat2,lon2);
+
+ x1=*(lat1);
+
+  x2=*(lat2);
+
+  y1=*(lon1);
+
+  y2=*(lon1);
+
+
+
+
+
+    res =distResult(x1,y1,x2,y2);
+
+
+
+    d = time2-time1;
+
+    timeDif += d;
+
+    total +=res;
+
+      ftime =(int) timeDif;
+      fdis =(int) total;
+
+      to =toArray(ftime,6);
+      ds =toArray(fdis,3);
+
+                 clear_LCD();
+                 fLine_LCD();
+                 rCurs_LCD();
+                 delayMs (500);
+
+
+                 Write_LCD(a ,10);
+                 Write_LCD(ds ,3);
+
+                    sLine_LCD();
+
+                    delayMs (1);
+
+                    Write_LCD(b ,6);
+
+    }
+
+    GPIO_PORTF_DATA_R |=0x02;
+
+
+
 }
