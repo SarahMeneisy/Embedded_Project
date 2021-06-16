@@ -42,7 +42,7 @@ void displayTime(int number,int len){
 
          for (j=0 ;j<len-1 ;j++){
 
-                        n *=10 ?
+                        n *=10 
                         }
 
                         for ( i=0 ;i<len+2 ;i++){
